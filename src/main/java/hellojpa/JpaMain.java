@@ -80,7 +80,40 @@ public class JpaMain {
 //        }finally {
 //        em.close();
 //        }
-//        emf.close();
-//    }
+
+        try {
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
+
+            Member member1 = new Member();
+            member1.setName("member1");
+            member1.setTeam(team);
+            Member member2 = new Member();
+            member2.setName("member2");
+            member2.setTeam(team);
+            em.persist(member1);
+            em.persist(member2);
+            em.flush();
+            em.clear();
+
+            Member findMember = em.find(Member.class, member1.getId());
+            Team findTeam = findMember.getTeam();
+            List<Member> members = findTeam.getMembers();
+            for (Member m : members) {
+                System.out.println("m.getName() = " + m.getName());
+            }
+            System.out.println("findTeam.getName() = " + findTeam.getName());
+            tx.commit();
+
+        } catch (Exception e) {
+            tx.rollback();
+        }
+        finally {
+            em.close();
+        }
+        emf.close();
     }
+
 }
+

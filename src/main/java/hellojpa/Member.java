@@ -6,7 +6,9 @@ import java.util.Date;
 @Entity
 public class Member {
     @Id
+    @GeneratedValue
     private Long id;
+
     private String name;
     private Integer age;
 
@@ -22,7 +24,9 @@ public class Member {
     @Lob
     private String description;
 
-
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
 
 
     public Member() {
@@ -33,6 +37,55 @@ public class Member {
         this.id = id;
         this.name = name;
     }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public RoleType getRoleType() {
+        return roleType;
+    }
+
+    public void setRoleType(RoleType roleType) {
+        this.roleType = roleType;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
 
     public Long getId() {
         return id;
