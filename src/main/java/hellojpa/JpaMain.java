@@ -6,6 +6,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -130,28 +131,29 @@ public class JpaMain {
 //            em.persist(member);
 //            tx.commit();
 
-//        try{
-//            Member member1 = new Member();
-//            member1.setName("hello1");
-//            em.persist(member1);
-//
-//            Member member2 = new Member();
-//            member2.setName("hello2");
-//            em.persist(member2);
-//
-//            em.flush();
-//            em.clear();
-//
-//            Member findMember1REF = em.getReference(Member.class, member1.getId());
-//            Member findMember1 = em.find(Member.class, member1.getId());
-//            Member findMember2 = em.find(Member.class, member2.getId());
-////            Member findMember2REF = em.getReference(Member.class, member2.getId());
-//            System.out.println("findMember1REF.getClass() = " + findMember1REF.getClass());
-//            System.out.println("findMember1.getClass() = " + findMember1.getClass());
-//            System.out.println("findMember2.getClass() = " + findMember2.getClass());
-//            System.out.println("findMember1.getClass()==findMember2.getClass() = " + (findMember1.getClass() == findMember2.getClass()));
-//            System.out.println("findMember1==findMember1REF = " + (findMember1 == findMember1REF));
-//
+        try{
+            Member member1 = new Member();
+            member1.setName("hello1");
+            em.persist(member1);
+
+            Member member2 = new Member();
+            member2.setName("hello2");
+            em.persist(member2);
+
+            em.flush();
+            em.clear();
+
+            Member findMember1REF = em.getReference(Member.class, member1.getId());
+            Member findMember1 = em.find(Member.class, member1.getId());
+            Member findMember2 = em.find(Member.class, member2.getId());
+            Member findMember2REF = em.getReference(Member.class, member2.getId());
+            System.out.println("findMember1REF.getClass() = " + findMember1REF.getClass());
+            System.out.println("findMember1.getClass() = " + findMember1.getClass());
+            System.out.println("findMember2.getClass() = " + findMember2.getClass());
+            System.out.println("findMember2REF.getClass() = " + findMember2REF.getClass());
+            System.out.println("findMember1.getClass() == findMember2REF.getClass() = " + (findMember1.getClass() == findMember2REF.getClass()));
+            System.out.println("findMember1==findMember1REF = " + (findMember1 == findMember1REF));
+
 //            em.detach(findMember1REF);
 //            //영속성 컨텍스트에서 제외시키면 LazyInitializationException 발생
 //            System.out.println("findMember1REF.getName(); = " + findMember1REF.getName());
@@ -165,7 +167,7 @@ public class JpaMain {
 ////            System.out.println("findMember.getName() = " + findMember.getName());
 //
 //
-//            tx.commit();
+            tx.commit();
 //        try{
 //            Team team = new Team();
 //            team.setName("TeamA");
@@ -189,26 +191,80 @@ public class JpaMain {
 //
 //            tx.commit();
 
-        try {
-            Child child1 = new Child();
-            Child child2 = new Child();
-            Parent parent = new Parent();
+//        try {
+//            Child child1 = new Child();
+//            Child child2 = new Child();
+//            Parent parent = new Parent();
+//
+//            parent.addChild(child1);
+//            parent.addChild(child2);
+//
+//            em.persist(parent);
+////            em.persist(child1);
+////            em.persist(child2);
+//
+//            em.flush();
+//            em.clear();
+//
+//            Parent findParent = em.find(Parent.class, parent.getId());
+//
+//            findParent.getChildList().remove(0);
+//
+//            tx.commit();
+//
+//        try {
+//            Member member = new Member();
+//            member.setName("AA");
+//            member.setAddress(new Address("city", "street", "zipcode"));
+//            member.setPeriod(new Period(LocalDateTime.now(), LocalDateTime.now()));
+//            em.persist(member);
+//            tx.commit();
 
-            parent.addChild(child1);
-            parent.addChild(child2);
-
-            em.persist(parent);
-//            em.persist(child1);
-//            em.persist(child2);
-
-            em.flush();
-            em.clear();
-
-            Parent findParent = em.find(Parent.class, parent.getId());
-
-            findParent.getChildList().remove(0);
-
-            tx.commit();
+//        try {
+//            AddressEntity addressEntity = new AddressEntity("city1", "street1", "zipcode1");
+//
+//            Member member1 = new Member();
+//            member1.setName("1");
+//            member1.setAddress(addressEntity.getAddress());
+//            member1.getFoods().add("음식1");
+//            member1.getFoods().add("음식2");
+//
+//            member1.getAddressList().add(addressEntity);
+//            member1.getAddressList().add(new AddressEntity("city2", "street2", "zipcode2"));
+//
+//            em.persist(member1);
+//
+//            Member member2 = new Member();
+//            member2.setName("2");
+//            member2.setAddress(addressEntity.getAddress());
+//            em.persist(member2);
+//
+////            member1.getAddress().setCity("newCity");
+//
+////            em.flush();
+////            em.clear();
+//
+//            System.out.println("==========================");
+//            Member findMember = em.find(Member.class, member1.getId());
+//            List<AddressEntity> addressList = findMember.getAddressList();
+//            for (AddressEntity a : addressList) {
+//                System.out.println("address="+a.getAddress().getCity());
+//            }
+//            Set<String> foods = findMember.getFoods();
+//            for (String food : foods) {
+//                System.out.println("food = " + food);
+//            }
+//
+//            Address findMemberAddress = findMember.getAddress();
+//            findMember.setAddress(new Address("newCity", findMemberAddress.getStreet(), findMemberAddress.getZipcode()));
+//
+//            findMember.getFoods().remove("음식1");
+//            findMember.getFoods().add("음료1");
+//
+//            findMember.getAddressList().remove(new AddressEntity("city2", "street2", "zipcode2"));
+//            findMember.getAddressList().add(new AddressEntity("city3", "street3", "zipcode3"));
+//
+//            tx.commit();
 
         } catch (Exception e) {
             tx.rollback();

@@ -1,9 +1,8 @@
 package hellojpa;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Entity
 public class Member extends BaseEntity {
@@ -18,11 +17,51 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
+    //기간
+    @Embedded
+    private Period period;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
+    //주소
+    @Embedded
+    private Address address;
+
+    @ElementCollection
+    @CollectionTable(name = "FOOD", joinColumns = @JoinColumn(name = "MEMBER_ID"))
+    @Column(name = "FOOD_NAME")
+    private Set<String> foods = new HashSet<>();
+
+//    @ElementCollection
+//    @CollectionTable(name = "ADDRESS_LIST", joinColumns = @JoinColumn(name = "MEMBER_ID"))
+//    private List<Address> addressList = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "MEMBER_ID")
+    private List<AddressEntity> addressList = new ArrayList<>();
+
+
+    public Set<String> getFoods() {
+        return foods;
+    }
+
+    public void setFoods(Set<String> foods) {
+        this.foods = foods;
+    }
+
+//    @Embedded
+
+    public List<AddressEntity> getAddressList() {
+        return addressList;
+    }
+
+    public void setAddressList(List<AddressEntity> addressList) {
+        this.addressList = addressList;
+    }
+//    @AttributeOverrides({
+//            @AttributeOverride(name = "city", column = @Column(name = "WORK CITY")),
+//                    @AttributeOverride(name = "street", column = @Column(name = "WORK STREET")),
+//                            @AttributeOverride(name = "zipcode", column = @Column(name = "WORK ZIPCODE"))
+//                                    })
+//    private Address workAddress;
 
     @Lob
     private String description;
@@ -37,6 +76,7 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "member")
     private List<MemberProduct> memberProducts = new ArrayList<>();
+
     public Member() {
 
     }
@@ -62,21 +102,6 @@ public class Member extends BaseEntity {
         this.roleType = roleType;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Date getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public void setLastModifiedDate(Date lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
 
     public String getDescription() {
         return description;
@@ -109,5 +134,37 @@ public class Member extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Period getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(Period period) {
+        this.period = period;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Locker getLocker() {
+        return locker;
+    }
+
+    public void setLocker(Locker locker) {
+        this.locker = locker;
+    }
+
+    public List<MemberProduct> getMemberProducts() {
+        return memberProducts;
+    }
+
+    public void setMemberProducts(List<MemberProduct> memberProducts) {
+        this.memberProducts = memberProducts;
     }
 }

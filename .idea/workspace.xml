@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="089dd157-62af-4997-b00c-dc563ad74670" name="Changes" comment="연관관계 매핑/ 상속 관계 매핑">
-      <change afterPath="$PROJECT_DIR$/src/main/java/hellojpa/Child.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hellojpa/Parent.java" afterDir="false" />
+    <list default="true" id="089dd157-62af-4997-b00c-dc563ad74670" name="Changes" comment="지연로딩, 연관관계 관리">
+      <change afterPath="$PROJECT_DIR$/src/main/java/hellojpa/Address.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hellojpa/AddressEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hellojpa/Period.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hellojpa/JpaMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hellojpa/JpaMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hellojpa/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hellojpa/Member.java" afterDir="false" />
@@ -38,7 +39,6 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "last_opened_file_path": "C:/Users/ddoly/Downloads/jpa study/jpa_practice/pom.xml",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
@@ -81,7 +81,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671529507214</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="지연로딩, 연관관계 관리">
+      <created>1671619272271</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1671619272271</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -99,6 +106,7 @@
     <MESSAGE value="영속성/엔티티 매핑" />
     <MESSAGE value="양/단방향 매핑" />
     <MESSAGE value="연관관계 매핑/ 상속 관계 매핑" />
-    <option name="LAST_COMMIT_MESSAGE" value="연관관계 매핑/ 상속 관계 매핑" />
+    <MESSAGE value="지연로딩, 연관관계 관리" />
+    <option name="LAST_COMMIT_MESSAGE" value="지연로딩, 연관관계 관리" />
   </component>
 </project>
