@@ -121,13 +121,93 @@ public class JpaMain {
 //            System.out.println("movie = " + movie1);
 //
 //            tx.commit();
-        try {
-            Member member = new Member();
-            member.setName("user");
-            member.setCreatedBy("kim");
-            member.setCreatedTime(LocalDateTime.now());
+//        try {
+//            Member member = new Member();
+//            member.setName("user");
+//            member.setCreatedBy("kim");
+//            member.setCreatedTime(LocalDateTime.now());
+//
+//            em.persist(member);
+//            tx.commit();
 
-            em.persist(member);
+//        try{
+//            Member member1 = new Member();
+//            member1.setName("hello1");
+//            em.persist(member1);
+//
+//            Member member2 = new Member();
+//            member2.setName("hello2");
+//            em.persist(member2);
+//
+//            em.flush();
+//            em.clear();
+//
+//            Member findMember1REF = em.getReference(Member.class, member1.getId());
+//            Member findMember1 = em.find(Member.class, member1.getId());
+//            Member findMember2 = em.find(Member.class, member2.getId());
+////            Member findMember2REF = em.getReference(Member.class, member2.getId());
+//            System.out.println("findMember1REF.getClass() = " + findMember1REF.getClass());
+//            System.out.println("findMember1.getClass() = " + findMember1.getClass());
+//            System.out.println("findMember2.getClass() = " + findMember2.getClass());
+//            System.out.println("findMember1.getClass()==findMember2.getClass() = " + (findMember1.getClass() == findMember2.getClass()));
+//            System.out.println("findMember1==findMember1REF = " + (findMember1 == findMember1REF));
+//
+//            em.detach(findMember1REF);
+//            //영속성 컨텍스트에서 제외시키면 LazyInitializationException 발생
+//            System.out.println("findMember1REF.getName(); = " + findMember1REF.getName());
+//
+//            //find의 경우 객체가 넘어오고 Referenc의 경우 프록시 객체가 넘어옴으로 ==으로 타입 비교시 false가 나옴
+//
+//            //한번에 조인해서 값을 모두 가져옴
+////            Member findMember = em.getReference(Member.class, member.getId());
+////            System.out.println("findMember = " + findMember.getClass());
+////            System.out.println("findMember.getId() = " + findMember.getId());
+////            System.out.println("findMember.getName() = " + findMember.getName());
+//
+//
+//            tx.commit();
+//        try{
+//            Team team = new Team();
+//            team.setName("TeamA");
+//            em.persist(team);
+//
+//            Member member1 = new Member();
+//            member1.setName("hello1");
+//            member1.setTeam(team);
+//            em.persist(member1);
+//            em.flush();
+//            em.clear();
+////            Member m = em.find(Member.class, member1.getId());
+////
+////
+////            System.out.println("m.getTeam.getClass() = " + m.getTeam().getClass());
+////            System.out.println("===============");
+////            m.getTeam().getName();
+////            System.out.println("===============");
+//
+//            List<Member> members = em.createQuery("SElECT m FROM MEMBER m", Member.class).getResultList();
+//
+//            tx.commit();
+
+        try {
+            Child child1 = new Child();
+            Child child2 = new Child();
+            Parent parent = new Parent();
+
+            parent.addChild(child1);
+            parent.addChild(child2);
+
+            em.persist(parent);
+//            em.persist(child1);
+//            em.persist(child2);
+
+            em.flush();
+            em.clear();
+
+            Parent findParent = em.find(Parent.class, parent.getId());
+
+            findParent.getChildList().remove(0);
+
             tx.commit();
 
         } catch (Exception e) {
